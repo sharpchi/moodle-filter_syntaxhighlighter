@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<libraries>
+  <library>
+    <location>amd/src/hljs.js</location>
+    <name>hljs</name>
+    <license>BSD</license>
+    <version>9.12.0</version>
+    <licenseversion>3.0+</licenseversion>
+  </library>
+</libraries>
