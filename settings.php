@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Settings for syntax highlighter.
+ *
  * @package   filter_syntaxhighlighter
  * @author    Mark Sharp <m.sharp@chi.ac.uk>
  * @copyright 2017 University of Chichester {@link www.chi.ac.uk}

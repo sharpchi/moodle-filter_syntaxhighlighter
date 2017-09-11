@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Main filter class
+ *
  * @package   filter_syntaxhighlighter
  * @author    Mark Sharp <m.sharp@chi.ac.uk>
  * @copyright 2017 University of Chichester {@link www.chi.ac.uk}
@@ -24,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Filter class for highlighting code syntax
+ * Filter class for highlighting code syntax.
  *
  * @package filter_syntaxhighlighter
  * @author    Mark Sharp <m.sharp@chi.ac.uk>
@@ -36,8 +38,8 @@ class filter_syntaxhighlighter extends moodle_text_filter {
     /**
      * The filter function is required, but the text just passes through. The javascript will pick up on <pre><code></code></pre> html.
      *
-     * @param $text HTML to be processed.
-     * @param $options
+     * @param string $text HTML to be processed.
+     * @param array $options Options for filter.
      * @return string String containing processed HTML.
      */
     public function filter($text, array $options = array()) {
