@@ -47,7 +47,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
             return $text;
         }
 
-        $re = '~```(.*?)```~is';
+        $re = "~```(.*?)```~isu";
         $result = preg_match_all($re, $text, $matches);
         if ($result > 0) {
             foreach ($matches[1] as $idx => $code) {
