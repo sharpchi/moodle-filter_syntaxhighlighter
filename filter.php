@@ -36,15 +36,14 @@ defined('MOODLE_INTERNAL') || die();
 class filter_syntaxhighlighter extends moodle_text_filter {
 
     /**
-     * The filter function is required, but the text just passes through. The javascript will pick up on <pre><code></code></pre> html.
+     * The filter function is required, but the text just passes through.
      *
      * @param string $text HTML to be processed.
      * @param array $options Options for filter.
      * @return string String containing processed HTML.
      */
     public function filter($text, array $options = array()) {
-        if (!is_string($text) or empty($text)) {
-            // non string data can not be filtered anyway
+        if (!is_string($text) || empty($text)) {
             return $text;
         }
 
