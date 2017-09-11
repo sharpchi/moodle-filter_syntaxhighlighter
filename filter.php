@@ -41,6 +41,22 @@ class filter_syntaxhighlighter extends moodle_text_filter {
      * @return string String containing processed HTML.
      */
     public function filter($text, array $options = array()) {
+        if (!is_string($text) or empty($text)) {
+            // non string data can not be filtered anyway
+            return $text;
+        }
+
+        $re = '~```(.*?)```~is';
+        $result = preg_match_all($re, $text, $matches);
+        if ($result > 0) {
+            foreach ($matches[1] as $idx => $code) {
+                $newcode = '<pre><code>' .
+                    str_replace(['<p>', '</p>'], ['', "\n"], $code) .
+                    '</code></pre>';
+                $text = str_replace($matches[0][$idx], $newcode, $text);
+            }
+        }
+
         return $text;
     }
 
