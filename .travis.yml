@@ -16,8 +16,10 @@ env:
   - IGNORE_PATHS=amd/src/hljs.js
 
  matrix:
-  - DB=pgsql
-  - DB=mysqli
+  - DB=pgsql MOODLE_BRANCH=MOODLE_32_STABLE
+  - DB=pgsql MOODLE_BRANCH=MOODLE_33_STABLE
+  - DB=mysqli MOODLE_BRANCH=MOODLE_32_STABLE
+  - DB=mysqli MOODLE_BRANCH=MOODLE_33_STABLE
 
 before_install:
   - phpenv config-rm xdebug.ini
@@ -28,8 +30,6 @@ before_install:
 
 install:
   - moodle-plugin-ci install
-  - moodle-plugin-ci add-config '$CFG->curlsecurityallowedport = "";'
-  - moodle-plugin-ci add-config '$CFG->curlsecurityblockedhosts = "";'
 
 script:
   - moodle-plugin-ci phplint
