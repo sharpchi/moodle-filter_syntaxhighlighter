@@ -25,8 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2017090701;
-$plugin->requires = 2016112900;
+$plugin->version = 2018041300;
+$plugin->requires = 2017111302;
 $plugin->component = 'filter_syntaxhighlighter';
-$plugin->maturity = MATURITY_BETA;
-$plugin->release = '0.3';
+$plugin->maturity = MATURITY_STABLE;
+$plugin->release = '3.4.2';
