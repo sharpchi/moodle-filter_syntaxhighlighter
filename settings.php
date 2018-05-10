@@ -118,5 +118,10 @@ if ($ADMIN->fulltree) {
                                          'atom-one-light',
                                          $options);
     $settings->add($setting);
+    
+    $setting = new admin_setting_configcheckbox('filter_syntaxhighlighter/cdn',
+                                        new lang_string('cdn', 'filter_syntaxhighlighter'),
+                                        new lang_string('cdn_desc', 'filter_highlighter'),
+                                        0);
 
 }

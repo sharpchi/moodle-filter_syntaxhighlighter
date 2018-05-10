@@ -68,11 +68,19 @@ class filter_syntaxhighlighter extends moodle_text_filter {
      * @param context $context The context which contents are going to be filtered.
      */
     public function setup($page, $context) {
+        global $CFG;
         static $jsinitialised = false;
 
         if (empty($jsinitialised)) {
+            
             $css = get_config('filter_syntaxhighlighter', 'styleurl');
-            $css = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/' . $css . '.min.css';
+            $cdn = get_config('filter_syntaxhighlighter', 'cdn');
+            if ($cdn) {
+                $css = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/' . $css . '.min.css';
+            } else {
+               $css =  $CFG->wwwroot . '/filter/syntaxhighlighter/styles/' . $css . '.min.css';
+            }
+            
             $styleurl = new moodle_url($css);
 
             $page->requires->js_call_amd('filter_syntaxhighlighter/hljs', 'initHighlighting');
