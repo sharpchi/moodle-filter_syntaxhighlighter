@@ -72,15 +72,13 @@ class filter_syntaxhighlighter extends moodle_text_filter {
         static $jsinitialised = false;
 
         if (empty($jsinitialised)) {
-            
             $css = get_config('filter_syntaxhighlighter', 'styleurl');
             $cdn = get_config('filter_syntaxhighlighter', 'cdn');
             if ($cdn) {
                 $css = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/' . $css . '.min.css';
             } else {
-               $css =  $CFG->wwwroot . '/filter/syntaxhighlighter/styles/' . $css . '.min.css';
+                $css = $CFG->wwwroot . '/filter/syntaxhighlighter/styles/' . $css . '.min.css';
             }
-            
             $styleurl = new moodle_url($css);
 
             $page->requires->js_call_amd('filter_syntaxhighlighter/hljs', 'initHighlighting');
