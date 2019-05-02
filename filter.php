@@ -48,9 +48,14 @@ class filter_syntaxhighlighter extends moodle_text_filter {
         }
 
         $re = "~```(.*?)```~isu";
+        $urlFormat = '/(https?|ftp):\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?/';
         $result = preg_match_all($re, $text, $matches);
         if ($result > 0) {
             foreach ($matches[1] as $idx => $code) {
+            // Check if the code has url format
+              if (preg_match($urlFormat , $code)){
+                $code = $this->fetchCodeFromUrl($code);
+              }
                 $newcode = '<pre><code>' .
                     str_replace(['<p>', '</p>'], ['', "\n"], $code) .
                     '</code></pre>';
@@ -87,4 +92,21 @@ class filter_syntaxhighlighter extends moodle_text_filter {
             $jsinitialised = true;
         }
     }
+
+    /**
+     * Fetch code  from repository
+     *
+     * @param url url to fetch code from.
+     * @return codeResult  String contains fetched code.
+     */
+
+    protected function fetchCodeFromUrl($url) {
+      $cleanedUrl = (string) trim(strip_tags($url));
+      $ch = curl_init($cleanedUrl);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      $codeResult = curl_exec($ch);
+      curl_close ($ch);
+      return $codeResult;
+    }
+
 }
