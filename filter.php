@@ -105,6 +105,10 @@ class filter_syntaxhighlighter extends moodle_text_filter {
       $ch = curl_init($cleanedUrl);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       $codeResult = curl_exec($ch);
+      $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+      if($httpCode != 200) {
+             $codeResult=$url;
+            }
       curl_close ($ch);
       return $codeResult;
     }
