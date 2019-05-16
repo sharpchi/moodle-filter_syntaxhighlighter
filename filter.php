@@ -53,8 +53,14 @@ class filter_syntaxhighlighter extends moodle_text_filter {
         if ($result > 0) {
             foreach ($matches[1] as $idx => $code) {
             // Check if the code has url format
-              if (preg_match($urlFormat , $code)){
-                $code = $this->fetchCodeFromUrl($code);
+              if (preg_match($urlFormat , $code,$matchUrlFormat)){
+                // Check using strncmp to validate $code doesn´t have nothing else than the url 
+                if(strncmp($matchUrlFormat[0], $code,strlen($matchUrlFormat[0])) !== 0 ){
+                   $code = $this->fetchCodeFromUrl($code);
+                 }
+                 else{
+                   return $text;
+                 }
               }
                 $newcode = '<pre><code>' .
                     str_replace(['<p>', '</p>'], ['', "\n"], $code) .
