@@ -37,3 +37,5 @@ echo multiply(10, 15);</code></pre>';
 $string['cdn'] = 'Use CDN';
 $string['cdn_desc'] = 'Use CDN library for stylesheets. This may be faster than loading the files locally,
                         but you may prefer loading the files locally for GDPR reasons.';
+$string['allowexternalsource'] = 'Use anything source';
+$string['allowexternalsource_desc'] = 'Allow use external source ,if not only work from Gitlab and Github official repo';

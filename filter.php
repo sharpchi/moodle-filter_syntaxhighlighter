@@ -43,18 +43,24 @@ class filter_syntaxhighlighter extends moodle_text_filter {
      * @return string String containing processed HTML.
      */
     public function filter($text, array $options = array()) {
+        //Define necessary regex
+        $regexOnlyGitlabAndGithub = '/(https:\/\/gitlab.com|https:\/\/raw.githubusercontent.com)/';
+        $regexExternalSources = '/(https?|ftp):\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?/';
+        $useExternalSources = get_config('filter_syntaxhighlighter', 'allowexternalsource');
+
         if (!is_string($text) || empty($text)) {
             return $text;
         }
 
         $re = "~```(.*?)```~isu";
-        $urlFormat = '/(https?|ftp):\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?/';
+        $urlFormat = (($useExternalSources > 0) ? $regexAllRepo : $regexOnlyGitlabAndGithub);
+
         $result = preg_match_all($re, $text, $matches);
         if ($result > 0) {
             foreach ($matches[1] as $idx => $code) {
             // Check if the code has url format
               if (preg_match($urlFormat , $code,$matchUrlFormat)){
-                // Check using strncmp to validate $code doesn´t have nothing else than the url 
+                // Check using strncmp to validate $code doesn´t have nothing else than the url
                 if(strncmp($matchUrlFormat[0], $code,strlen($matchUrlFormat[0])) !== 0 ){
                    $code = $this->fetchCodeFromUrl($code);
                  }

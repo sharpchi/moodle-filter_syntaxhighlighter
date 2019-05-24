@@ -124,4 +124,11 @@ if ($ADMIN->fulltree) {
                                         new lang_string('cdn_desc', 'filter_syntaxhighlighter'),
                                         0);
     $settings->add($setting);
+
+    $setting = new admin_setting_configcheckbox('filter_syntaxhighlighter/allowexternalsource',
+                                       new lang_string('allowexternalsource', 'filter_syntaxhighlighter'),
+                                       new lang_string('allowexternalsource_desc', 'filter_syntaxhighlighter'),
+                                       0);
+
+    $settings->add($setting);
 }
