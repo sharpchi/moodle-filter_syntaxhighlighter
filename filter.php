@@ -43,7 +43,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
      * @return string String containing processed HTML.
      */
     public function filter($text, array $options = array()) {
-        //Define necessary regex
+        //Define necessary regexs
         $regexOnlyGitlabAndGithub = '/(https:\/\/gitlab.com|https:\/\/raw.githubusercontent.com)/';
         $regexExternalSources = '/(https?|ftp):\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?/';
         $useExternalSources = get_config('filter_syntaxhighlighter', 'allowexternalsource');
@@ -118,10 +118,11 @@ class filter_syntaxhighlighter extends moodle_text_filter {
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       $codeResult = curl_exec($ch);
       $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-      if($httpCode != 200) {
+      if($httpCode != 200 ) {
              $codeResult=$url;
             }
       curl_close ($ch);
+      $codeResult=htmlentities($codeResult);
       return $codeResult;
     }
 
