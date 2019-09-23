@@ -77,7 +77,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
             if ($cdn) {
                 $css = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/' . $css . '.min.css';
             } else {
-                $css = $CFG->wwwroot . '/filter/syntaxhighlighter/styles/' . $css . '.min.css';
+                $css = $CFG->wwwroot . '/filter/syntaxhighlighter/styles/' . $css . '.css';
             }
             $styleurl = new moodle_url($css);
 
