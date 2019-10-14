@@ -51,9 +51,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
         $result = preg_match_all($re, $text, $matches);
         if ($result > 0) {
             foreach ($matches[1] as $idx => $code) {
-                $newcode = '<pre><code>' .
-                    str_replace(['<p>', '</p>'], ['', "\n"], $code) .
-                    '</code></pre>';
+                $newcode = '<pre><code>' . $code . '</code></pre>';
                 $text = str_replace($matches[0][$idx], $newcode, $text);
             }
         }
@@ -81,6 +79,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
             }
             $styleurl = new moodle_url($css);
 
+            $page->requires->js_call_amd('filter_syntaxhighlighter/textify', 'init');
             $page->requires->js_call_amd('filter_syntaxhighlighter/hljs', 'initHighlighting');
             $page->requires->css($styleurl);
 
