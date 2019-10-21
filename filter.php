@@ -47,6 +47,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
             return $text;
         }
 
+		/*
         $re = "~```(.*?)```~isu";
         $result = preg_match_all($re, $text, $matches);
         if ($result > 0) {
@@ -57,6 +58,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
                 $text = str_replace($matches[0][$idx], $newcode, $text);
             }
         }
+		 */
 
         return $text;
     }
@@ -81,6 +83,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
             }
             $styleurl = new moodle_url($css);
 
+            $page->requires->js_call_amd('filter_syntaxhighlighter/hlhs-helper', 'init');
             $page->requires->js_call_amd('filter_syntaxhighlighter/hljs', 'initHighlighting');
             $page->requires->css($styleurl);
 
