@@ -8,6 +8,7 @@ define({
 			var lang = s.match(hl_re);
 			if (lang && lang.length > 1) {
 				s = s.replace(hl_re, '');
+				s = s.replace(/<br>/g, '\n');
 				var code = document.createElement("CODE");
 				code.className = lang[1];
 				code.innerHTML = s;
