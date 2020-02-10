@@ -47,18 +47,26 @@ class filter_syntaxhighlighter extends moodle_text_filter {
             return $text;
         }
 
-        $re = "~```(.*?)```~isu";
-        $result = preg_match_all($re, $text, $matches);
-        if ($result > 0) {
-            foreach ($matches[1] as $idx => $code) {
-                $newcode = '<pre><code>' .
-                    str_replace(['<p>', '</p>'], ['', "\n"], $code) .
-                    '</code></pre>';
-                $text = str_replace($matches[0][$idx], $newcode, $text);
-            }
-        }
+        // regExp detects optional language example input:
+        //    "<h3>header<h3><p>paragraph</p><pre>```lang:anything;;\r\n...code...```</pre>"
+        $re = "~(<pre>)```(lang:(\w+);;[\r\n]{0,}|)(.*?)```(<\/pre>|)~isu";
+        
+        // preg_replace_callback should be faster then loop regex matches replace it in full string input
+        return preg_replace_callback($re, array($this, 'code_replace'), $text);
+    }
 
-        return $text;
+    private function code_replace($mGrp) {
+        // mGrp ...matchGroup of regExp match
+        // mGrp[0] = "<pre>```lang:anything;;...code...```</pre>"  // prevents "<pre><pre><code>..." if <pre> in Atto used
+        // mGrp[1] = "<pre>"                 // recommended to place inside <pre> in Atto editor (preserves \s+, \t, \r, \n,... chars)
+        // mGrp[2] = "lang:anything;;\r\n"   // with trailing line break (\r|\n|\r\n) for dirrefent line break styles (preserve of empty rows in code block)
+        // mGrp[3] = "anything"              // specified lang class from https://github.com/highlightjs/highlight.js#supported-languages 
+        // mGrp[4] = "...code..."
+        // mGrp[5] = "</pre>"
+        return
+            '<pre><code' . ($mGrp[2] ? ' class="lang-' . $mGrp[3] .'"' : '') . '>' .  // lang specified > add class for hjls
+                str_replace(['<p>', '</p>'], ['', "\n"], $mGrp[4]) .
+            '</code></pre>';
     }
 
     /**
