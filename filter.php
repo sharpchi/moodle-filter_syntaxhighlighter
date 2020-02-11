@@ -49,7 +49,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
 
         // regExp detects optional language example input:
         //    "<h3>header<h3><p>paragraph</p><pre>```lang:anything;;\r\n...code...```</pre>"
-        $re = "~(<pre>)```(lang:(\w+);;[\r\n]{0,}|)(.*?)```(<\/pre>|)~isu";
+        $re = "~(<pre>|)```(lang:(\w+);;[\r\n]{0,}|)(.*?)```(<\/pre>|)~isu";
         
         // preg_replace_callback should be faster then loop regex matches replace it in full string input
         return preg_replace_callback($re, array($this, 'code_replace'), $text);
