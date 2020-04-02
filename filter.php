@@ -59,7 +59,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
         // mGrp ...matchGroup of regExp match
         // mGrp[0] = "<pre>```lang:anything;;...code...```</pre>"  // prevents "<pre><pre><code>..." if <pre> in Atto used
         // mGrp[1] = "<pre>"                 // recommended to place inside <pre> in Atto editor (preserves \s+, \t, \r, \n,... chars)
-        // mGrp[2] = "lang:anything;;\r\n"   // with trailing line break (\r|\n|\r\n) for dirrefent line break styles (preserve of empty rows in code block)
+        // mGrp[2] = "lang:anything;;\r\n"   // with trailing line break (\r|\n|\r\n) for different line break styles (preserve of empty rows in code block)
         // mGrp[3] = "anything"              // specified lang class from https://github.com/highlightjs/highlight.js#supported-languages 
         // mGrp[4] = "...code..."
         // mGrp[5] = "</pre>"
