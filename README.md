@@ -19,7 +19,7 @@ Alternatively, you can specify the language in a `<code>` tag: `<pre><code class
 
 ## Available languages
 
-apache, bash, coffeescript, cpp, cs, css, diff, http, ini, java, javascript, json, makefile, markdown, nginx, objectivec, perl, php, python, ruby, shell, sql, xml
+apache, arduino, bash, coffeescript, cpp, cs, css, delphi, diff, django, dockerfile, dsconfig, erb, fortran, gauss, gherkin, go, haml, handlebars, haskell, http, ini, java, javascript, json, kotlin, less, lisp, livescript, lua, makefile, markdown, mathematica, matlab, nginx, objectivec, perl, php, plaintext, powershell, prolog, properties, puppet, python, qml, r, ruby, rust, scala, scss, shell, swift, sql, tcl, twig, typescript, vala, vbnet, vbscript, vbscript-html, xml, x86asm, yaml
 
 ## Install
 
