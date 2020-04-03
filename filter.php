@@ -90,6 +90,8 @@ class filter_syntaxhighlighter extends moodle_text_filter {
             $styleurl = new moodle_url($css);
 
             $page->requires->js_call_amd('filter_syntaxhighlighter/hljs', 'initHighlighting');
+            $page->requires->js_call_amd('filter_syntaxhighlighter/hljs-numbering', 'init');
+            $page->requires->js_call_amd('filter_syntaxhighlighter/hljs-numbering', 'initLineNumbersOnLoad');
             $page->requires->css($styleurl);
 
             $jsinitialised = true;
