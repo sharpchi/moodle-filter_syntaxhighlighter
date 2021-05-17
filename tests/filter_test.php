@@ -17,7 +17,7 @@
 /**
  * Unit Tests for syntaxhighligher
  *
- * @package   block_syntaxhighlighter
+ * @package   filter_syntaxhighlighter
  * @author    Mark Sharp <m.sharp@chi.ac.uk>
  * @copyright 2021 University of Chichester {@link https://www.chi.ac.uk}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -46,7 +46,7 @@ class filter_test extends advanced_testcase {
         $tests = [
             [
                 'in' => '<p>```</p><p>echo "Hello";</p><p>```<br></p>',
-                'out'=> "<p><pre><code>\necho \"Hello\";\n</code></pre><br></p>"
+                'out' => "<p><pre><code>\necho \"Hello\";\n</code></pre><br></p>"
             ],
             [
                 'in' => '<pre>```echo "Hello";```</pre>',
@@ -77,7 +77,7 @@ class filter_test extends advanced_testcase {
         $tests = [
             [
                 'in' => '<p>```lang:php;;</p><p>echo "Hello";</p><p>```<br></p>',
-                'out'=> "<p><pre><code class=\"lang-php\">\necho \"Hello\";\n</code></pre><br></p>"
+                'out' => "<p><pre><code class=\"lang-php\">\necho \"Hello\";\n</code></pre><br></p>"
             ],
             [
                 'in' => '<pre>```lang:php;;echo "Hello";```</pre>',
@@ -90,8 +90,8 @@ class filter_test extends advanced_testcase {
         ];
 
         foreach ($tests as $test) {
-            $filter = $filterplugin->filter($test['in']);
-            $this->assertContains($test['out'], $filter);
+            $filtered = $filterplugin->filter($test['in']);
+            $this->assertEquals($test['out'], $filtered);
         }
     }
 }

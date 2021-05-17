@@ -19,7 +19,7 @@
  *
  * @package   filter_syntaxhighlighter
  * @author    Mark Sharp <m.sharp@chi.ac.uk>
- * @copyright 2017 University of Chichester {@link www.chi.ac.uk}
+ * @copyright 2017 University of Chichester {@link https://www.chi.ac.uk}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
  *
  * @package filter_syntaxhighlighter
  * @author    Mark Sharp <m.sharp@chi.ac.uk>
- * @copyright 2017 University of Chichester {@link www.chi.ac.uk}
+ * @copyright 2017 University of Chichester {@link https://www.chi.ac.uk}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class filter_syntaxhighlighter extends moodle_text_filter {
@@ -40,6 +40,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
      *
      * @param string $text HTML to be processed.
      * @param array $options Options for filter.
+     * 
      * @return string String containing processed HTML.
      */
     public function filter($text, array $options = array()) {
@@ -47,25 +48,37 @@ class filter_syntaxhighlighter extends moodle_text_filter {
             return $text;
         }
 
-        // regExp detects optional language example input:
-        //    "<h3>header<h3><p>paragraph</p><pre>```lang:anything;;\r\n...code...```</pre>"
+        // RegExp detects optional language example input.
         $re = "~(<pre>|)```(lang:(\w+);;[\r\n]{0,}|)(.*?)```(<\/pre>|)~isu";
-        
-        // preg_replace_callback should be faster then loop regex matches replace it in full string input
         return preg_replace_callback($re, array($this, 'code_replace'), $text);
     }
 
-    private function code_replace($mGrp) {
-        // mGrp ...matchGroup of regExp match
-        // mGrp[0] = "<pre>```lang:anything;;...code...```</pre>"  // prevents "<pre><pre><code>..." if <pre> in Atto used
-        // mGrp[1] = "<pre>"                 // recommended to place inside <pre> in Atto editor (preserves \s+, \t, \r, \n,... chars)
-        // mGrp[2] = "lang:anything;;\r\n"   // with trailing line break (\r|\n|\r\n) for different line break styles (preserve of empty rows in code block)
-        // mGrp[3] = "anything"              // specified lang class from https://github.com/highlightjs/highlight.js#supported-languages 
-        // mGrp[4] = "...code..."
-        // mGrp[5] = "</pre>"
+    /**
+     * Replaces match group with formatted html.
+     *
+     * @param array $mgrp Match group from preg_replace.
+     * 
+     * @return string
+     */
+    private function code_replace($mgrp) {
+        /**
+         * Match Group of regExp match
+         * * Prevents "<pre><pre><code>..." if <pre> in Atto used.
+         * mgrp[0] = "<pre>```lang:anything;;...code...```</pre>"
+         * * Recommended to place inside <pre> in Atto editor
+         * * (preserves \s+,\t,\r,\n chars)
+         * mgrp[1] = "<pre>"
+         * * With trailing line break (\r|\n|\r\n) for different 
+         * * line break styles (preserve of empty rows in code block)
+         * mgrp[2] = "lang:anything;;\r\n"
+         * * Specified lang class
+         * mgrp[3] = "anything"              
+         * mgrp[4] = "...code..."
+         * mgrp[5] = "</pre>"
+         */
         return
-            '<pre><code' . ($mGrp[2] ? ' class="lang-' . $mGrp[3] .'"' : '') . '>' .  // lang specified > add class for hjls
-                str_replace(['<p>', '</p>'], ['', "\n"], $mGrp[4]) .
+            '<pre><code' . ($mgrp[2] ? ' class="lang-' . $mgrp[3] .'"' : '') . '>' .
+                str_replace(['<p>', '</p>'], ['', "\n"], $mgrp[4]) .
             '</code></pre>';
     }
 
