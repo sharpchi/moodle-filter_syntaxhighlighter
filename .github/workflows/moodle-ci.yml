@@ -39,7 +39,7 @@ jobs:
             database: pgsql
           - php: '8.0'
             moodle-branch: 'MOODLE_311_STABLE'
-            database: mysqli
+            database: mariadb
           - php: '7.4'
             moodle-branch: 'MOODLE_39_STABLE'
             database: mariadb
