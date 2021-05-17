@@ -62,11 +62,11 @@ class filter_syntaxhighlighter extends moodle_text_filter {
      * * Recommended to place inside <pre> in Atto editor
      * * (preserves \s+,\t,\r,\n chars)
      * mgrp[1] = "<pre>"
-     * * With trailing line break (\r|\n|\r\n) for different 
+     * * With trailing line break (\r|\n|\r\n) for different
      * * line break styles (preserve of empty rows in code block)
      * mgrp[2] = "lang:anything;;\r\n"
      * * Specified lang class
-     * mgrp[3] = "anything"              
+     * mgrp[3] = "anything"     
      * mgrp[4] = "...code..."
      * mgrp[5] = "</pre>"
      *
