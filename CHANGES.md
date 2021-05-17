@@ -1,5 +1,8 @@
 # Changes
 
+## Version 2020040201
+
+- Added automated test scripts
 ## Version 2020040200
 
 - Allow language to be specified #4
