@@ -40,7 +40,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
      *
      * @param string $text HTML to be processed.
      * @param array $options Options for filter.
-     * 
+     *
      * @return string String containing processed HTML.
      */
     public function filter($text, array $options = array()) {
@@ -56,26 +56,25 @@ class filter_syntaxhighlighter extends moodle_text_filter {
     /**
      * Replaces match group with formatted html.
      *
+     * Match Group of regExp match
+     * * Prevents "<pre><pre><code>..." if <pre> in Atto used.
+     * mgrp[0] = "<pre>```lang:anything;;...code...```</pre>"
+     * * Recommended to place inside <pre> in Atto editor
+     * * (preserves \s+,\t,\r,\n chars)
+     * mgrp[1] = "<pre>"
+     * * With trailing line break (\r|\n|\r\n) for different 
+     * * line break styles (preserve of empty rows in code block)
+     * mgrp[2] = "lang:anything;;\r\n"
+     * * Specified lang class
+     * mgrp[3] = "anything"              
+     * mgrp[4] = "...code..."
+     * mgrp[5] = "</pre>"
+     *
      * @param array $mgrp Match group from preg_replace.
-     * 
+     *
      * @return string
      */
     private function code_replace($mgrp) {
-        /**
-         * Match Group of regExp match
-         * * Prevents "<pre><pre><code>..." if <pre> in Atto used.
-         * mgrp[0] = "<pre>```lang:anything;;...code...```</pre>"
-         * * Recommended to place inside <pre> in Atto editor
-         * * (preserves \s+,\t,\r,\n chars)
-         * mgrp[1] = "<pre>"
-         * * With trailing line break (\r|\n|\r\n) for different 
-         * * line break styles (preserve of empty rows in code block)
-         * mgrp[2] = "lang:anything;;\r\n"
-         * * Specified lang class
-         * mgrp[3] = "anything"              
-         * mgrp[4] = "...code..."
-         * mgrp[5] = "</pre>"
-         */
         return
             '<pre><code' . ($mgrp[2] ? ' class="lang-' . $mgrp[3] .'"' : '') . '>' .
                 str_replace(['<p>', '</p>'], ['', "\n"], $mgrp[4]) .
