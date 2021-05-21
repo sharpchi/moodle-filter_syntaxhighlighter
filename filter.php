@@ -66,7 +66,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
      * * line break styles (preserve of empty rows in code block)
      * mgrp[2] = "lang:anything;;\r\n"
      * * Specified lang class
-     * mgrp[3] = "anything"     
+     * mgrp[3] = "anything"
      * mgrp[4] = "...code..."
      * mgrp[5] = "</pre>"
      *
