@@ -1,7 +1,5 @@
 @filter @filter_syntaxhighlighter @uoc
-Feature: Render Code using SyntaxHiglighter filters
-  To highlight code with a SyntaxHiglighter
-
+Feature: Do not Render Code using SyntaxHiglighter filters if filter is off
   Background:
     Given the following "courses" exist:
       | shortname | fullname |
@@ -17,32 +15,15 @@ Feature: Render Code using SyntaxHiglighter filters
     And the following "activities" exist:
       | activity | name       | intro      | introformat | course | content   | contentformat | idnumber |
       | page     | PageName1  | PageDesc1  | 1           | C1     | HLJStest  | 1             | 1        |
-    And the "syntaxhighlighter" filter is "on"
+    And the "syntaxhighlighter" filter is "off"
 
   @javascript @external
-  Scenario: Render autodetect language.
+  Scenario: Do not run if Filter is Off
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I follow "PageName1"
     And I navigate to "Edit settings" in current page administration
-    And I set the field "Page content" to "<p>```</p><p>echo \"Hello\";</p><p>```<br></p>"
-    When I click on "Save and display" "button"
-    And I wait until the page is ready
-    Then ".hljs" "css_element" should exist
-    And ".hljs-attribute" "css_element" should exist
-    And I log out
-    And I log in as "student1"
-    And I am on "Course 1" course homepage
-    And I follow "PageName1"
-    Then ".hljs" "css_element" should exist
-    And ".hljs-attribute" "css_element" should exist
-
-  Scenario: Do not render if user sets nohighlight.
-    Given I log in as "teacher1"
-    And I am on "Course 1" course homepage
-    And I follow "PageName1"
-    And I navigate to "Edit settings" in current page administration
-    And I set the field "Page content" to "<pre><code class=\"nohighlight\">echo \"Hello\";</code></pre>"
+    And I set the field "Page content" to "<p>```</p><p>echo \"Hello\";</p><p>```<br></p><code><pre>echo \"Hello\";</code></pre>"
     When I click on "Save and display" "button"
     And I wait until the page is ready
     Then ".hljs" "css_element" should not exist

@@ -42,7 +42,7 @@ class filter_test extends advanced_testcase {
         $this->resetAfterTest(true);
 
         $filterplugin = new filter_syntaxhighlighter(null, []);
-
+        // phpcs:disable moodle.Strings.ForbiddenStrings.Found
         $tests = [
             [
                 'in' => '<p>```</p><p>echo "Hello";</p><p>```<br></p>',
@@ -57,7 +57,7 @@ class filter_test extends advanced_testcase {
                 'out' => '<pre><code>echo "Hello";</code></pre>'
             ],
         ];
-
+        // phpcs:enable moodle.Strings.ForbiddenStrings.Found
         foreach ($tests as $test) {
             $filtered = $filterplugin->filter($test['in']);
             $this->assertEquals($test['out'], $filtered);
@@ -73,7 +73,7 @@ class filter_test extends advanced_testcase {
         $this->resetAfterTest(true);
 
         $filterplugin = new filter_syntaxhighlighter(null, []);
-
+        // phpcs:disable moodle.Strings.ForbiddenStrings.Found
         $tests = [
             [
                 'in' => '<p>```lang:php;;</p><p>echo "Hello";</p><p>```<br></p>',
@@ -88,7 +88,7 @@ class filter_test extends advanced_testcase {
                 'out' => '<pre><code class="lang-php">echo "Hello";</code></pre>'
             ]
         ];
-
+        // phpcs:enable moodle.Strings.ForbiddenStrings.Found
         foreach ($tests as $test) {
             $filtered = $filterplugin->filter($test['in']);
             $this->assertEquals($test['out'], $filtered);

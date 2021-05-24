@@ -24,6 +24,14 @@ Alternatively, you can specify the language in a `<code>` tag: `<pre><code class
 
 apache, arduino, bash, coffeescript, cpp, cs, css, delphi, diff, django, dockerfile, dsconfig, erb, fortran, gauss, gherkin, go, haml, handlebars, haskell, http, ini, java, javascript, json, kotlin, less, lisp, livescript, lua, makefile, markdown, mathematica, matlab, nginx, objectivec, perl, php, plaintext, powershell, prolog, properties, puppet, python, qml, r, ruby, rust, scala, scss, shell, swift, sql, tcl, twig, typescript, vala, vbnet, vbscript, vbscript-html, xml, x86asm, yaml
 
+## Turning off the filter in context
+
+If you want more control over the presentation of `<pre><code></code></pre>` contexts, change the filter's settings at the *site level* to 'Off, but available'. You can then switch it on in the contexts you wish.
+
+Alternatively, by adding the class 'nohighlight' to the code tag, highlighting is stopped. i.e.
+
+`<pre><code class="nohighlight">My code</code></pre>`
+
 ## Install
 
 1.  Unzip
@@ -38,4 +46,5 @@ Since this is a 3rd party plugin, any change requests that relate to the the sty
 
 Thanks to the following contributors for improving this project:
 
+- [lucaboesch](https://github.com/lucaboesch)
 - [lukeXcze](https://github.com/lukeXcze)

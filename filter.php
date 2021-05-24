@@ -47,9 +47,10 @@ class filter_syntaxhighlighter extends moodle_text_filter {
         if (!is_string($text) || empty($text)) {
             return $text;
         }
-
+        // phpcs:disable moodle.Strings.ForbiddenStrings.Found
         // RegExp detects optional language example input.
         $re = "~(<pre>|)```(lang:(\w+);;[\r\n]{0,}|)(.*?)```(<\/pre>|)~isu";
+        // phpcs:enable moodle.Strings.ForbiddenStrings.Found
         return preg_replace_callback($re, array($this, 'code_replace'), $text);
     }
 
