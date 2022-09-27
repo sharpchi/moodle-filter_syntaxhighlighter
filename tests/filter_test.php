@@ -56,6 +56,10 @@ class filter_test extends advanced_testcase {
                 'in' => '<pre><code>echo "Hello";</code></pre>',
                 'out' => '<pre><code>echo "Hello";</code></pre>'
             ],
+	    [
+		'in' => '<p>```echo "Hello";<br>echo "World";<br>```<br></p>',
+		'out' => "<p><pre><code>echo \"Hello\";\necho \"World\";\n</code></pre><br></p>"
+	    ],
         ];
         // phpcs:enable moodle.Strings.ForbiddenStrings.Found
         foreach ($tests as $test) {
@@ -86,7 +90,11 @@ class filter_test extends advanced_testcase {
             [
                 'in' => '<pre><code class="lang-php">echo "Hello";</code></pre>',
                 'out' => '<pre><code class="lang-php">echo "Hello";</code></pre>'
-            ]
+            ],
+	    [
+		'in' => '<p>```lang:cs;;echo "Hello";<br>echo "World";<br>```<br></p>',
+		'out' => "<p><pre><code class=\"lang-cs\">echo \"Hello\";\necho \"World\";\n</code></pre><br></p>"
+	    ],
         ];
         // phpcs:enable moodle.Strings.ForbiddenStrings.Found
         foreach ($tests as $test) {
