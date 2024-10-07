@@ -25,8 +25,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Syntax Highlighter';
+$string['cdn'] = 'Use CDN';
+$string['cdn_desc'] = 'Use CDN library for stylesheets. This may be faster than loading the files locally,
+                        but you may prefer loading the files locally for GDPR reasons.';
 $string['filtername'] = 'Syntax Highlighter';
+$string['pluginname'] = 'Syntax Highlighter';
 $string['privacy:metadata'] = 'The filter_syntaxhighlighter plugin does not store any personal data.';
 $string['style'] = 'Highlighting style';
 $string['style_desc'] = 'The name of the stylesheet to use for highlighting.<p>Example style (Save changes to update)</p>
@@ -34,6 +37,3 @@ $string['style_desc'] = 'The name of the stylesheet to use for highlighting.<p>E
     return $a * $b;
 }
 echo multiply(10, 15);</code></pre>';
-$string['cdn'] = 'Use CDN';
-$string['cdn_desc'] = 'Use CDN library for stylesheets. This may be faster than loading the files locally,
-                        but you may prefer loading the files locally for GDPR reasons.';

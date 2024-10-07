@@ -19,10 +19,7 @@ Feature: Do not Render Code using SyntaxHiglighter filters if filter is off
 
   @javascript @external
   Scenario: Do not run if Filter is Off
-    Given I log in as "teacher1"
-    And I am on "Course 1" course homepage
-    And I follow "PageName1"
-    And I navigate to "Edit settings" in current page administration
+    Given I am on the "PageName1" "page activity editing" page logged in as teacher1
     And I set the field "Page content" to "<p>```</p><p>echo \"Hello\";</p><p>```<br></p><code><pre>echo \"Hello\";</code></pre>"
     When I click on "Save and display" "button"
     And I wait until the page is ready
