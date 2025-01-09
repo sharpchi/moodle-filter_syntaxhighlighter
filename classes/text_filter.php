@@ -34,7 +34,7 @@ class text_filter extends \moodle_text_filter {
      *
      * @return string String containing processed HTML.
      */
-    public function filter($text, array $options = array()) {
+    public function filter($text, array $options = []) {
         if (!is_string($text) || empty($text)) {
             return $text;
         }
@@ -42,7 +42,7 @@ class text_filter extends \moodle_text_filter {
         // RegExp detects optional language example input.
         $re = "~(<pre>|)```(lang:(\w+);;[\r\n]{0,}|)(.*?)```(<\/pre>|)~isu";
         // phpcs:enable moodle.Strings.ForbiddenStrings.Found
-        return preg_replace_callback($re, array($this, 'code_replace'), $text);
+        return preg_replace_callback($re, [$this, 'code_replace'], $text);
     }
 
     /**

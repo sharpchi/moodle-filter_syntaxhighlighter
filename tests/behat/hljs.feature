@@ -22,9 +22,7 @@ Feature: Render Code using SyntaxHiglighter filters
   @javascript @external
   Scenario: Render autodetect language.
     Given I log in as "teacher1"
-    And I am on "Course 1" course homepage
-    And I follow "PageName1"
-    And I navigate to "Edit settings" in current page administration
+    And I am on the "PageName1" "page activity editing" page
     And I set the field "Page content" to "<p>```</p><p>echo \"Hello\";</p><p>```<br></p>"
     When I click on "Save and display" "button"
     And I wait until the page is ready
@@ -39,9 +37,7 @@ Feature: Render Code using SyntaxHiglighter filters
 
   Scenario: Do not render if user sets nohighlight.
     Given I log in as "teacher1"
-    And I am on "Course 1" course homepage
-    And I follow "PageName1"
-    And I navigate to "Edit settings" in current page administration
+    And I am on the "PageName1" "page activity editing" page
     And I set the field "Page content" to "<pre><code class=\"nohighlight\">echo \"Hello\";</code></pre>"
     When I click on "Save and display" "button"
     And I wait until the page is ready

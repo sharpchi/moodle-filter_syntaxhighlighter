@@ -23,10 +23,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+namespace filter_syntaxhighlighter;
 
-global $CFG;
-require_once($CFG->dirroot . '/filter/syntaxhighlighter/filter.php'); // Include the code to test.
+use advanced_testcase;
 
 /**
  * Filter unit test
@@ -36,25 +35,26 @@ class filter_test extends advanced_testcase {
     /**
      * General test filter
      *
+     * @covers \filter_syntaxhighlighter\text_filter::filter
      * @return void
      */
     public function test_autodetect() {
         $this->resetAfterTest(true);
 
-        $filterplugin = new filter_syntaxhighlighter(null, []);
+        $filterplugin = new text_filter(null, []);
         // phpcs:disable moodle.Strings.ForbiddenStrings.Found
         $tests = [
             [
                 'in' => '<p>```</p><p>echo "Hello";</p><p>```<br></p>',
-                'out' => "<p><pre><code>\necho \"Hello\";\n</code></pre><br></p>"
+                'out' => "<p><pre><code>\necho \"Hello\";\n</code></pre><br></p>",
             ],
             [
                 'in' => '<pre>```echo "Hello";```</pre>',
-                'out' => '<pre><code>echo "Hello";</code></pre>'
+                'out' => '<pre><code>echo "Hello";</code></pre>',
             ],
             [
                 'in' => '<pre><code>echo "Hello";</code></pre>',
-                'out' => '<pre><code>echo "Hello";</code></pre>'
+                'out' => '<pre><code>echo "Hello";</code></pre>',
             ],
         ];
         // phpcs:enable moodle.Strings.ForbiddenStrings.Found
@@ -67,26 +67,27 @@ class filter_test extends advanced_testcase {
     /**
      * Test specified language.
      *
+     * @covers \filter_syntaxhighlighter\text_filter::filter
      * @return void
      */
     public function test_lang() {
         $this->resetAfterTest(true);
 
-        $filterplugin = new filter_syntaxhighlighter(null, []);
+        $filterplugin = new text_filter(null, []);
         // phpcs:disable moodle.Strings.ForbiddenStrings.Found
         $tests = [
             [
                 'in' => '<p>```lang:php;;</p><p>echo "Hello";</p><p>```<br></p>',
-                'out' => "<p><pre><code class=\"lang-php\">\necho \"Hello\";\n</code></pre><br></p>"
+                'out' => "<p><pre><code class=\"lang-php\">\necho \"Hello\";\n</code></pre><br></p>",
             ],
             [
                 'in' => '<pre>```lang:php;;echo "Hello";```</pre>',
-                'out' => '<pre><code class="lang-php">echo "Hello";</code></pre>'
+                'out' => '<pre><code class="lang-php">echo "Hello";</code></pre>',
             ],
             [
                 'in' => '<pre><code class="lang-php">echo "Hello";</code></pre>',
-                'out' => '<pre><code class="lang-php">echo "Hello";</code></pre>'
-            ]
+                'out' => '<pre><code class="lang-php">echo "Hello";</code></pre>',
+            ],
         ];
         // phpcs:enable moodle.Strings.ForbiddenStrings.Found
         foreach ($tests as $test) {
