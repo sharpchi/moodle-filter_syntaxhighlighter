@@ -78,7 +78,7 @@ class filter_syntaxhighlighter extends moodle_text_filter {
     private function code_replace($mgrp) {
         return
             '<pre><code' . ($mgrp[2] ? ' class="lang-' . $mgrp[3] .'"' : '') . '>' .
-                str_replace(['<p>', '</p>'], ['', "\n"], $mgrp[4]) .
+                str_replace(['<p>', '</p>', '<br>', '<div>', '</div>'], ['', "\n", "\n", '', "\n"], $mgrp[4]) .
             '</code></pre>';
     }
 
