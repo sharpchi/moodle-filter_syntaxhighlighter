@@ -1,7 +1,7 @@
 moodle-filter_syntaxhighlighter
 ===============================
 
-[![Moodle Plugin CI](https://github.com/sharpchi/moodle-filter_syntaxhighlighter/workflows/Moodle%20Plugin%20CI/badge.svg?branch=master)](https://github.com/sharpchi/moodle-filter_syntaxhighlighter/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amaster)
+[![Moodle Plugin CI](https://github.com/sharpchi/moodle-filter_syntaxhighlighter/workflows/Moodle%20Plugin%20CI/badge.svg?branch=main)](https://github.com/sharpchi/moodle-filter_syntaxhighlighter/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amain)
 
 This is a filter plugin that uses a 3rd party Javascript module called [highlight.js](https://highlightjs.org/) to make your code look like something you'd see in an IDE.
 
